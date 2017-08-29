@@ -63,7 +63,7 @@ public:
 // template <typename T, std::size_t PerBlock = 32, typename Allocator = std::allocator<T>>
 template <typename T, typename Container = std::vector<T>, typename IndexType = std::int32_t>
 class unordered_array {
-  static_assert(std::is_signed<IndexType>::value);
+  static_assert(std::is_signed<IndexType>::value, "");
 
   enum index_values : IndexType {
     INVALID = -1,
