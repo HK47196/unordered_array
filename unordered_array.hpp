@@ -123,18 +123,16 @@ public:
 
 private:
   template <typename U>
-  using vector_alias = std::vector<
-    U,
-    typename std::allocator_traits<typename Container::allocator_type>::template rebind_alloc<U>>;
+  using vector_alias =
+    std::vector<U, typename std::allocator_traits<
+                     typename Container::allocator_type>::template rebind_alloc<U>>;
 
   // This can be thought of as a structure of arrays. The two items are conceptually unrelated.
   struct map_item_t {
     IndexType sparse_to_dense;
     IndexType dense_to_sparse;
 
-    map_item_t(const IndexType a, const IndexType b)
-      : sparse_to_dense(a)
-      , dense_to_sparse(b) {}
+    map_item_t(const IndexType a, const IndexType b) : sparse_to_dense(a), dense_to_sparse(b) {}
   };
 
   Container storage_;
@@ -149,15 +147,12 @@ private:
 
 template <typename T, typename U, typename K>
 template <typename Allocator>
-unordered_array<T, U, K>::unordered_array(const Allocator& alloc)
-  : storage_{alloc} {
+unordered_array<T, U, K>::unordered_array(const Allocator& alloc) : storage_{alloc} {
 }
 template <typename T, typename U, typename K>
 unordered_array<T, U, K>::unordered_array(unordered_array&& other)
-  : storage_{std::move(other.storage)}
-  , map_array_{std::move(other.map_array_)}
-  , free_slot_{std::exchange(other.free_slot_, INVALID)}
-  , size_{std::exchange(other.size_, 0)} {
+  : storage_{std::move(other.storage)}, map_array_{std::move(other.map_array_)},
+    free_slot_{std::exchange(other.free_slot_, INVALID)}, size_{std::exchange(other.size_, 0)} {
 }
 template <typename T, typename U, typename K>
 auto unordered_array<T, U, K>::operator=(unordered_array&& other) -> unordered_array& {

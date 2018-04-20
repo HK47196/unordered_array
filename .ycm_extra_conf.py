@@ -46,6 +46,9 @@ flags = [
     '-Wno-missing-braces', #for std::array
     '-std=c++1z',
     '-Iinclude',
+    '-isystemthird_party',
+    '-isystemthird_party/variant/include',
+    '-I.',
 ]
 
 
